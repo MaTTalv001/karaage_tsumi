@@ -22,11 +22,19 @@ function App() {
   };
 
   const handleTweet = () => {
-    const tweetText = `【からあげ積み増しタワー】からあげ【 】個積み上げた！！ #からあげ積み増しタワー #RUNTEQ`;
+    const tweetText = `【からあげ積み増しタワー】からあげ【${score}】個積み上げた！！ #からあげ積み増しタワー #RUNTEQ`;
     const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
       post.url
     )}&text=${encodeURIComponent(tweetText)}`;
-    window.open(twitterUrl, "_blank");
+  
+    if (navigator.share) {
+      navigator.share({
+        url: post.url,
+        text: tweetText,
+      });
+    } else {
+      window.open(twitterUrl, "_blank", "noopener,noreferrer");
+    }
   };
 
   const dispatchKeyboardEvent = (key) => {
