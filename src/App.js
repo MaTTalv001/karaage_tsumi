@@ -26,7 +26,7 @@ function App() {
     const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
       post.url
     )}&text=${encodeURIComponent(tweetText)}`;
-    window.open(twitterUrl, "_blank");
+    window.location.href = twitterUrl;
   };
 
   const dispatchKeyboardEvent = (key) => {
@@ -42,8 +42,8 @@ function App() {
       </div>
       <div className="flex justify-center items-center mt-10">
         
-      <button className="btn btn-secondary absolute top-2 right-2" onClick={handleTweet}>
-                    Xでシェア(ゲーム内ボタン効かない時用（個数手入力)
+      <button className="btn btn-secondary btn-sm absolute top-2 right-2" onClick={handleTweet}>
+                    スマホXシェア(個数手入力)
                   </button>
         <div className="card w-96 bg-base-100 shadow-xl">
         
