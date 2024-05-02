@@ -39,6 +39,12 @@ const Sketch = () => {
         });
       };
 
+      p.touchStarted = () => {
+        if (gameOver) {
+          displayGameOver(p);
+        }
+      };
+
       p.setup = () => {
         p.createCanvas(400, 600).parent(containerRef.current);
         engine = Matter.Engine.create();
@@ -151,6 +157,14 @@ const Sketch = () => {
           handleTweet(score);
         }
       }
+
+      p.touchStarted = () => {
+        if (p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 25 && p.mouseY < p.height / 2 + 75) {
+          window.location.reload();
+        } else if (p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 100 && p.mouseY < p.height / 2 + 150) {
+          handleTweet(score);
+        }
+      };
 
       p.keyPressed = (event) => {
         if (!gameOver && currentBlock) {
