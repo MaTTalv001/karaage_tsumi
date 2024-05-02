@@ -46,7 +46,7 @@ function App() {
     <div className="App min-h-screen bg-base-200">
       <div className="navbar bg-base-100 shadow-lg">
         <a className="btn btn-ghost normal-case text-xl">からあげ積み増しタワー</a>
-        <a>キーボードでも下のボタンでもOK.現在スマホはXシェアできないです...</a>
+        <a>矢印キーか下のボタン.現在スマホはXシェア起動しないかも..</a>
 
       </div>
       <div className="flex justify-center items-center mt-10">
