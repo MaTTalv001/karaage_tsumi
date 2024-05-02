@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sketch from './components/Sketch';
 
 function App() {
+  const [score, setScore] = useState(0);
+
   const handleLeftArrowClick = () => {
     dispatchKeyboardEvent('ArrowLeft');
   };
 
   const handleRightArrowClick = () => {
     dispatchKeyboardEvent('ArrowRight');
+  };
+
+  const handleShareScore = (score) => {
+    setScore(score);
+  };
+
+  const handleTweet = () => {
+    const tweetText = `【からあげ積み増しタワー】からあげ【 】個積み上げた！！ #からあげ積み増しタワー #RUNTEQ`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+    window.open(twitterUrl, "_blank");
   };
 
   const dispatchKeyboardEvent = (key) => {
@@ -19,30 +31,39 @@ function App() {
     <div className="App min-h-screen bg-base-200">
       <div className="navbar bg-base-100 shadow-lg">
         <a className="btn btn-ghost normal-case text-xl">からあげ積み増しタワー</a>
+        <a className="text-sm">ゲーム内シェアボタンを押せない時用（手入力）→</a>
+
       </div>
       <div className="flex justify-center items-center mt-10">
+        
+      <button className="btn btn-secondary absolute top-2 right-2" onClick={handleTweet}>
+                    Xでシェア
+                  </button>
         <div className="card w-96 bg-base-100 shadow-xl">
+        
           <div className="hidden md:block">
             <div className="mockup-phone">
               <div className="camera"></div>
               <div className="display">
-                <div className="artboard artboard-demo phone-1">
-                  <Sketch />
+                <div className="artboard artboard-demo phone-1 relative">
+                  <Sketch onShareScore={handleShareScore} />
+                  
                 </div>
               </div>
             </div>
           </div>
-          <div className="md:hidden">
-            <Sketch />
+          <div className="md:hidden relative">
+            <Sketch onShareScore={handleShareScore} />
+            
           </div>
         </div>
       </div>
       <div className="fixed bottom-0 left-0 right-0 p-4 flex justify-between">
         <button className="btn btn-primary btn-lg" onClick={handleLeftArrowClick}>
-          Left
+          ←Left
         </button>
         <button className="btn btn-primary btn-lg" onClick={handleRightArrowClick}>
-          Right
+          Right→
         </button>
       </div>
     </div>
