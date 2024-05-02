@@ -132,15 +132,17 @@ const Sketch = () => {
         }
       }
 
-      p.keyPressed = () => {
+      p.keyPressed = (event) => {
         if (!gameOver) {
-          if (p.keyCode === p.LEFT_ARROW) {
+          if (event.code === 'ArrowLeft') {
             Matter.Body.setVelocity(currentBlock.body, { x: -2, y: 0 });
-          } else if (p.keyCode === p.RIGHT_ARROW) {
+          } else if (event.code === 'ArrowRight') {
             Matter.Body.setVelocity(currentBlock.body, { x: 2, y: 0 });
           }
         }
       };
+      
+      document.addEventListener('keydown', p.keyPressed);
 
       function newBlock() {
         let x = p.random(40, p.width - 40);

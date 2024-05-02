@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App min-h-screen bg-base-200">
       <div className="navbar bg-base-100 shadow-lg">
-        <a className="btn btn-ghost normal-case text-xl">Block Stacking Game</a>
+        <a className="btn btn-ghost normal-case text-xl">からあげ積み増しタワー</a>
       </div>
       <div className="flex justify-center items-center mt-10">
         <div className="card w-96 bg-base-100 shadow-xl">
