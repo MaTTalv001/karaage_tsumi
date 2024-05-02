@@ -16,9 +16,16 @@ function App() {
     setScore(score);
   };
 
+  const post = {
+    title: "からあげ積み増しタワー",
+    url: "https://karaage-tsumi.vercel.app/",
+  };
+
   const handleTweet = () => {
     const tweetText = `【からあげ積み増しタワー】からあげ【 】個積み上げた！！ #からあげ積み増しタワー #RUNTEQ`;
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+    const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      post.url
+    )}&text=${encodeURIComponent(tweetText)}`;
     window.open(twitterUrl, "_blank");
   };
 
@@ -31,13 +38,12 @@ function App() {
     <div className="App min-h-screen bg-base-200">
       <div className="navbar bg-base-100 shadow-lg">
         <a className="btn btn-ghost normal-case text-xl">からあげ積み増しタワー</a>
-        <a className="text-sm">ゲーム内シェアボタンを押せない時用（手入力）→</a>
 
       </div>
       <div className="flex justify-center items-center mt-10">
         
       <button className="btn btn-secondary absolute top-2 right-2" onClick={handleTweet}>
-                    Xでシェア
+                    Xでシェア(ゲーム内ボタン効かない時用（個数手入力)
                   </button>
         <div className="card w-96 bg-base-100 shadow-xl">
         
