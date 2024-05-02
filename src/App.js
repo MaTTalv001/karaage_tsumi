@@ -46,13 +46,12 @@ function App() {
     <div className="App min-h-screen bg-base-200">
       <div className="navbar bg-base-100 shadow-lg">
         <a className="btn btn-ghost normal-case text-xl">からあげ積み増しタワー</a>
+        <a>キーボードでも下のボタンでもOK.現在スマホはXシェアできないです...</a>
 
       </div>
       <div className="flex justify-center items-center mt-10">
         
-      <button className="btn btn-secondary btn-sm absolute top-2 right-2" onClick={handleTweet}>
-                    スマホXシェア(個数手入力)
-                  </button>
+      
         <div className="card w-96 bg-base-100 shadow-xl">
         
           <div className="hidden md:block">
