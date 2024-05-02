@@ -169,8 +169,17 @@ const Sketch = () => {
 
       p.touchStarted = () => {
         if (gameOver) {
-          displayGameOver(p);
+          const touchX = p.mouseX;
+          const touchY = p.mouseY;
+
+          if (touchX > p.width / 2 - 50 && touchX < p.width / 2 + 50 && touchY > p.height / 2 + 25 && touchY < p.height / 2 + 75) {
+            window.location.reload();
+          } else if (touchX > p.width / 2 - 50 && touchX < p.width / 2 + 50 && touchY > p.height / 2 + 100 && touchY < p.height / 2 + 150) {
+            handleTweet(score);
+          }
         }
+
+        return false;
       };
 
       function newBlock() {
