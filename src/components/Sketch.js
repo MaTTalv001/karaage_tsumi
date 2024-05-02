@@ -33,9 +33,9 @@ const Sketch = () => {
 
       p.preload = () => {
         blockImage = p.loadImage('images/karaage.png', () => {
-          console.log('Image loaded successfully');
+          console.log('画像読み込み');
         }, () => {
-          console.error('Error loading image');
+          console.error('画像読み込み失敗');
         });
       };
 
@@ -43,6 +43,8 @@ const Sketch = () => {
         p.createCanvas(400, 600).parent(containerRef.current);
         engine = Matter.Engine.create();
         world = engine.world;
+
+        world.gravity.y = 0.4;
 
         // 床のブロックを設置
         baseBlock = new Block(p.width / 2, p.height - 20, 120, 40, world);
@@ -57,6 +59,7 @@ const Sketch = () => {
         p.textSize(24);
         p.textAlign(p.LEFT, p.TOP);
         p.text("Score: " + score, 60, 60);
+        p.text(" ←→で操作 " , 200, 60);
 
         if (!gameStarted) {
           displayStartButton(p);
@@ -162,9 +165,9 @@ const Sketch = () => {
             const touchCanvasY = touchY - canvasRect.top;
       
             if (touchCanvasX < p.width / 2) {
-              Matter.Body.setVelocity(currentBlock.body, { x: -2, y: 0 });
+              Matter.Body.setVelocity(currentBlock.body, { x: -1.5, y: 1 });
             } else {
-              Matter.Body.setVelocity(currentBlock.body, { x: 2, y: 0 });
+              Matter.Body.setVelocity(currentBlock.body, { x: 1.5, y: 1 });
             }
           }
       
@@ -189,9 +192,9 @@ const Sketch = () => {
       p.keyPressed = (event) => {
         if (!gameOver && currentBlock) {
           if (event.key === 'ArrowLeft' || event.detail?.key === 'ArrowLeft') {
-            Matter.Body.setVelocity(currentBlock.body, { x: -2, y: 0 });
+            Matter.Body.setVelocity(currentBlock.body, { x: -1.5, y: 1 });
           } else if (event.key === 'ArrowRight' || event.detail?.key === 'ArrowRight') {
-            Matter.Body.setVelocity(currentBlock.body, { x: 2, y: 0 });
+            Matter.Body.setVelocity(currentBlock.body, { x: 1.5, y: 1 });
           }
         }
       };
