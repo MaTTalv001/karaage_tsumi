@@ -26,7 +26,7 @@ function App() {
     const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
       post.url
     )}&text=${encodeURIComponent(tweetText)}`;
-    window.location.href = twitterUrl;
+    window.open(twitterUrl, "_blank");
   };
 
   const dispatchKeyboardEvent = (key) => {
@@ -52,14 +52,14 @@ function App() {
               <div className="camera"></div>
               <div className="display">
                 <div className="artboard artboard-demo phone-1 relative">
-                  <Sketch onShareScore={handleShareScore} />
+                  <Sketch />
                   
                 </div>
               </div>
             </div>
           </div>
           <div className="md:hidden relative">
-            <Sketch onShareScore={handleShareScore} />
+            <Sketch />
             
           </div>
         </div>
