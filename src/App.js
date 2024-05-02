@@ -11,8 +11,8 @@ function App() {
   };
 
   const dispatchKeyboardEvent = (key) => {
-    const event = new KeyboardEvent('keydown', { key });
-    document.dispatchEvent(event);
+    const event = new CustomEvent('keydown', { detail: { key } });
+    window.dispatchEvent(event);
   };
 
   return (
@@ -22,22 +22,19 @@ function App() {
       </div>
       <div className="flex justify-center items-center mt-10">
         <div className="card w-96 bg-base-100 shadow-xl">
-        <div className="hidden md:block">
-    <div className="mockup-phone">
-      <div className="camera"></div> 
-      <div className="display">
-        <div className="artboard artboard-demo phone-1">
-         
-          <Sketch />
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
-  <div className="md:hidden">
-    <Sketch />
-  </div>
+          <div className="hidden md:block">
+            <div className="mockup-phone">
+              <div className="camera"></div>
+              <div className="display">
+                <div className="artboard artboard-demo phone-1">
+                  <Sketch />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="md:hidden">
+            <Sketch />
+          </div>
         </div>
       </div>
       <div className="fixed bottom-0 left-0 right-0 p-4 flex justify-between">

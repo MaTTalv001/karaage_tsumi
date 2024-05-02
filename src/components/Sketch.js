@@ -154,15 +154,16 @@ const Sketch = () => {
 
       p.keyPressed = (event) => {
         if (!gameOver && currentBlock) {
-          if (event.code === 'ArrowLeft') {
+          if (event.key === 'ArrowLeft' || event.detail?.key === 'ArrowLeft') {
             Matter.Body.setVelocity(currentBlock.body, { x: -2, y: 0 });
-          } else if (event.code === 'ArrowRight') {
+          } else if (event.key === 'ArrowRight' || event.detail?.key === 'ArrowRight') {
             Matter.Body.setVelocity(currentBlock.body, { x: 2, y: 0 });
           }
         }
       };
-      
+
       document.addEventListener('keydown', p.keyPressed);
+      window.addEventListener('keydown', p.keyPressed);
 
       function newBlock() {
         let x = p.random(40, p.width - 40);
@@ -199,6 +200,11 @@ const Sketch = () => {
     };
 
     new p5(Sketch);
+
+    return () => {
+      document.removeEventListener('keydown', Sketch.prototype.keyPressed);
+      window.removeEventListener('keydown', Sketch.prototype.keyPressed);
+    };
   }, []);
 
   return <div ref={containerRef}></div>;
