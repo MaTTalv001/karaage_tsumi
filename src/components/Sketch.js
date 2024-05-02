@@ -39,12 +39,6 @@ const Sketch = () => {
         });
       };
 
-      p.touchStarted = () => {
-        if (gameOver) {
-          displayGameOver(p);
-        }
-      };
-
       p.setup = () => {
         p.createCanvas(400, 600).parent(containerRef.current);
         engine = Matter.Engine.create();
@@ -151,20 +145,14 @@ const Sketch = () => {
         p.textAlign(p.CENTER, p.CENTER);
         p.text("Xでシェア", p.width / 2, p.height / 2 + 125);
 
-        if (p.mouseIsPressed && p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 25 && p.mouseY < p.height / 2 + 75) {
-          window.location.reload();
-        } else if (p.mouseIsPressed && p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 100 && p.mouseY < p.height / 2 + 150) {
-          handleTweet(score);
-        }
+        p.touchStarted = () => {
+          if (p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 25 && p.mouseY < p.height / 2 + 75) {
+            window.location.reload();
+          } else if (p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 100 && p.mouseY < p.height / 2 + 150) {
+            handleTweet(score);
+          }
+        };
       }
-
-      p.touchStarted = () => {
-        if (p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 25 && p.mouseY < p.height / 2 + 75) {
-          window.location.reload();
-        } else if (p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 100 && p.mouseY < p.height / 2 + 150) {
-          handleTweet(score);
-        }
-      };
 
       p.keyPressed = (event) => {
         if (!gameOver && currentBlock) {
@@ -178,6 +166,12 @@ const Sketch = () => {
 
       document.addEventListener('keydown', p.keyPressed);
       window.addEventListener('keydown', p.keyPressed);
+
+      p.touchStarted = () => {
+        if (gameOver) {
+          displayGameOver(p);
+        }
+      };
 
       function newBlock() {
         let x = p.random(40, p.width - 40);
