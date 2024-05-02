@@ -3,6 +3,17 @@ import p5 from 'p5';
 import Matter from 'matter-js';
 import { Block } from './Block';
 
+const post = {
+  title: "からあげ積み増しタワー",
+  url: "https://karaage-tsumi.vercel.app/",
+};
+
+const handleTweet = (score) => {
+  const tweetText = `【からあげ積み増しタワー】からあげ${score}個積み上げた！！ #からあげ積み増しタワー #RUNTEQ`;
+  const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(post.url)}&text=${encodeURIComponent(tweetText)}`;
+  window.open(twitterUrl, "_blank");
+};
+
 const Sketch = () => {
   const containerRef = useRef();
 
@@ -45,7 +56,7 @@ const Sketch = () => {
         p.fill(0);
         p.textSize(24);
         p.textAlign(p.LEFT, p.TOP);
-        p.text("Score: " + score, 10, 10);
+        p.text("Score: " + score, 60, 60);
 
         if (!gameStarted) {
           displayStartButton(p);
@@ -127,13 +138,22 @@ const Sketch = () => {
         p.textAlign(p.CENTER, p.CENTER);
         p.text("Restart", p.width / 2, p.height / 2 + 50);
 
+        p.fill(255);
+        p.rect(p.width / 2 - 50, p.height / 2 + 100, 100, 50);
+        p.fill(0);
+        p.textSize(20);
+        p.textAlign(p.CENTER, p.CENTER);
+        p.text("Xでシェア", p.width / 2, p.height / 2 + 125);
+
         if (p.mouseIsPressed && p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 25 && p.mouseY < p.height / 2 + 75) {
           window.location.reload();
+        } else if (p.mouseIsPressed && p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 100 && p.mouseY < p.height / 2 + 150) {
+          handleTweet(score);
         }
       }
 
       p.keyPressed = (event) => {
-        if (!gameOver) {
+        if (!gameOver && currentBlock) {
           if (event.code === 'ArrowLeft') {
             Matter.Body.setVelocity(currentBlock.body, { x: -2, y: 0 });
           } else if (event.code === 'ArrowRight') {
@@ -146,7 +166,7 @@ const Sketch = () => {
 
       function newBlock() {
         let x = p.random(40, p.width - 40);
-        currentBlock = new Block(x, 40, 80, 40, world, blockImage);
+        currentBlock = new Block(x, 40, 60, 40, world, blockImage);
         blocks.push(currentBlock);
         Matter.Events.on(engine, 'collisionStart', checkCollision);
       }
