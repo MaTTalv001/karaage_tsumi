@@ -38,10 +38,10 @@ function App() {
         </div>
       </div>
       <div className="fixed bottom-0 left-0 right-0 p-4 flex justify-between">
-        <button className="btn btn-primary" onClick={handleLeftArrowClick}>
+        <button className="btn btn-primary btn-wide" onClick={handleLeftArrowClick}>
           Left
         </button>
-        <button className="btn btn-primary" onClick={handleRightArrowClick}>
+        <button className="btn btn-primary btn-wide" onClick={handleRightArrowClick}>
           Right
         </button>
       </div>
