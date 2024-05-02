@@ -44,7 +44,7 @@ const Sketch = () => {
         engine = Matter.Engine.create();
         world = engine.world;
 
-        world.gravity.y = 0.4;
+        world.gravity.y = 0.2;
 
         // 床のブロックを設置
         baseBlock = new Block(p.width / 2, p.height - 20, 120, 40, world);
@@ -148,10 +148,12 @@ const Sketch = () => {
         p.textAlign(p.CENTER, p.CENTER);
         p.text("Xでシェア", p.width / 2, p.height / 2 + 125);
 
-        if (p.mouseIsPressed && p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 25 && p.mouseY < p.height / 2 + 75) {
-          window.location.reload();
-        } else if (p.mouseIsPressed && p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 100 && p.mouseY < p.height / 2 + 150) {
-          handleTweet(score);
+        if (p.mouseIsPressed) {
+          if (p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 25 && p.mouseY < p.height / 2 + 75) {
+            window.location.reload();
+          } else if (p.mouseX > p.width / 2 - 50 && p.mouseX < p.width / 2 + 50 && p.mouseY > p.height / 2 + 100 && p.mouseY < p.height / 2 + 150) {
+            handleTweet(score);
+          }
         }
       }
 
@@ -178,10 +180,10 @@ const Sketch = () => {
             const touchCanvasX = touchX - canvasRect.left;
             const touchCanvasY = touchY - canvasRect.top;
       
-            if (touchCanvasX > p.width / 2 - 50 && touchCanvasX < p.width / 2 + 50 && touchCanvasY > p.height / 2 + 25 && touchCanvasY < p.height / 2 + 75) {
-              window.location.reload();
-            } else if (touchCanvasX > p.width / 2 - 50 && touchCanvasX < p.width / 2 + 50 && touchCanvasY > p.height / 2 + 100 && touchCanvasY < p.height / 2 + 150) {
+            if (touchCanvasX > p.width / 2 - 50 && touchCanvasX < p.width / 2 + 50 && touchCanvasY > p.height / 2 + 100 && touchCanvasY < p.height / 2 + 150) {
               handleTweet(score);
+            } else if (touchCanvasX > p.width / 2 - 50 && touchCanvasX < p.width / 2 + 50 && touchCanvasY > p.height / 2 + 25 && touchCanvasY < p.height / 2 + 75) {
+              window.location.reload();
             }
           }
         }
