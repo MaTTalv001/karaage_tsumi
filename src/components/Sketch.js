@@ -8,6 +8,7 @@ const post = {
   url: "https://karaage-tsumi.vercel.app/",
 };
 
+// ツイート共有機能
 const handleTweet = (score) => {
   const tweetText = `【からあげ積み増しタワー】からあげ${score}個積み上げた！！ #からあげ積み増しタワー #RUNTEQ`;
   const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(post.url)}&text=${encodeURIComponent(tweetText)}`;
@@ -31,6 +32,7 @@ const Sketch = () => {
       let countdownTimer;
       let blockImage;
 
+      // 画像の事前読み込み
       p.preload = () => {
         blockImage = p.loadImage('images/karaage.png', () => {
           console.log('画像読み込み');
@@ -39,22 +41,27 @@ const Sketch = () => {
         });
       };
 
+      // ゲームの初期化
       p.setup = () => {
         p.createCanvas(400, 600).parent(containerRef.current);
         engine = Matter.Engine.create();
         world = engine.world;
 
-        world.gravity.y = 0.2;
+        // 重力の設定を変更
+        engine.gravity.scale = 0.002; // 重力の大きさを設定
+        engine.gravity.y = 0.2; // 重力の方向を設定（下向きの場合はy=1）
 
         // 床のブロックを設置
         baseBlock = new Block(p.width / 2, p.height - 20, 120, 40, world);
         baseBlock.body.isStatic = true; // 床は動かないように設定
       };
 
+      // ゲームのメインループ
       p.draw = () => {
         p.background(200);
         Matter.Engine.update(engine);
 
+        // スコアと操作方法を表示
         p.fill(0);
         p.textSize(24);
         p.textAlign(p.LEFT, p.TOP);
@@ -74,6 +81,7 @@ const Sketch = () => {
         }
       };
 
+      // スタートボタンの表示
       function displayStartButton(p) {
         p.fill(255);
         p.rect(p.width / 2 - 50, p.height / 2 - 25, 100, 50);
@@ -88,6 +96,7 @@ const Sketch = () => {
         }
       }
 
+      // カウントダウンの開始
       function startCountdown() {
         countdownTimer = setInterval(() => {
           countdown--;
@@ -98,6 +107,7 @@ const Sketch = () => {
         }, 1000);
       }
 
+      // カウントダウンの表示
       function displayCountdown(p) {
         p.fill(255, 0, 0);
         p.textSize(48);
@@ -105,6 +115,7 @@ const Sketch = () => {
         p.text(countdown.toString(), p.width / 2, p.height / 2);
       }
 
+      // ゲームの更新
       function updateGame(p) {
         baseBlock.show(p);
 
@@ -128,6 +139,7 @@ const Sketch = () => {
         }
       }
 
+      // ゲームオーバー画面の表示
       function displayGameOver(p) {
         p.fill(255, 0, 0);
         p.textSize(48);
@@ -157,6 +169,7 @@ const Sketch = () => {
         }
       }
 
+      // タッチ操作のイベント処理
       p.touchStarted = (event) => {
         if (event.touches && event.touches.length > 0) {
           if (!gameOver && currentBlock) {
@@ -191,6 +204,7 @@ const Sketch = () => {
         return false;
       };
 
+      // キーボード操作のイベント処理
       p.keyPressed = (event) => {
         if (!gameOver && currentBlock) {
           if (event.key === 'ArrowLeft' || event.detail?.key === 'ArrowLeft') {
@@ -204,6 +218,7 @@ const Sketch = () => {
       document.addEventListener('keydown', p.keyPressed);
       window.addEventListener('keydown', p.keyPressed);
 
+      // 新しいブロックの生成
       function newBlock() {
         let x = p.random(40, p.width - 40);
         currentBlock = new Block(x, 40, 60, 40, world, blockImage);
@@ -211,6 +226,7 @@ const Sketch = () => {
         Matter.Events.on(engine, 'collisionStart', checkCollision);
       }
 
+      // 衝突判定
       function checkCollision(event) {
         const { pairs } = event;
         const activeBlocks = blocks.map(block => block.body.id);
@@ -228,6 +244,7 @@ const Sketch = () => {
         }
       }
 
+      // スコアの加算
       function addScore() {
         score++;
         Matter.Events.off(engine, 'collisionStart', checkCollision);

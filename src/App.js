@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Sketch from './components/Sketch';
 
 function App() {
-  const [score, setScore] = useState(0);
 
   const handleLeftArrowClick = () => {
     dispatchKeyboardEvent('ArrowLeft');
@@ -12,31 +11,6 @@ function App() {
     dispatchKeyboardEvent('ArrowRight');
   };
 
-  const handleShareScore = (score) => {
-    setScore(score);
-  };
-
-  const post = {
-    title: "からあげ積み増しタワー",
-    url: "https://karaage-tsumi.vercel.app/",
-  };
-
-  const handleTweet = () => {
-    const tweetText = `【からあげ積み増しタワー】からあげ【${score}】個積み上げた！！ #からあげ積み増しタワー #RUNTEQ`;
-    const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-      post.url
-    )}&text=${encodeURIComponent(tweetText)}`;
-  
-    if (navigator.share) {
-      navigator.share({
-        url: post.url,
-        text: tweetText,
-      });
-    } else {
-      window.open(twitterUrl, "_blank", "noopener,noreferrer");
-    }
-  };
-
   const dispatchKeyboardEvent = (key) => {
     const event = new CustomEvent('keydown', { detail: { key } });
     window.dispatchEvent(event);
@@ -44,30 +18,26 @@ function App() {
 
   return (
     <div className="App min-h-screen bg-base-200">
-      <div className="navbar bg-base-100 shadow-lg">
-        <a className="btn btn-ghost normal-case text-xl">からあげ積み増しタワー</a>
-        <a>矢印キーか下のボタン.現在スマホはXシェア起動しないかも..</a>
-
-      </div>
-      <div className="flex justify-center items-center mt-10">
-        
-      
+      <header>
+        <div className="navbar bg-base-100 shadow-lg">
+          <a className="btn btn-ghost normal-case text-xl">からあげ積み増しタワー</a>
+          <a>矢印キーか画面タップで操作.現在スマホはXシェア起動しないかも..</a>  
+        </div>
+      </header>
+      <div className="flex justify-center items-center mt-10">      
         <div className="card w-96 bg-base-100 shadow-xl">
-        
-          <div className="hidden md:block">
+          <div className="hidden md:block"> {/*画面が大きい時はスマホモック*/}
             <div className="mockup-phone">
               <div className="camera"></div>
               <div className="display">
                 <div className="artboard artboard-demo phone-1 relative">
-                  <Sketch />
-                  
+                  <Sketch />               
                 </div>
               </div>
             </div>
           </div>
           <div className="md:hidden relative">
             <Sketch />
-            
           </div>
         </div>
       </div>
