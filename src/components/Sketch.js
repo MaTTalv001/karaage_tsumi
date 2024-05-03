@@ -170,39 +170,39 @@ const Sketch = () => {
       }
 
       // タッチ操作のイベント処理
-      p.touchStarted = (event) => {
-        if (event.touches && event.touches.length > 0) {
-          if (!gameOver && currentBlock) {
-            const touchX = event.touches[0].clientX;
-            const touchY = event.touches[0].clientY;
-            const canvasRect = p.canvas.getBoundingClientRect();
-            const touchCanvasX = touchX - canvasRect.left;
-            const touchCanvasY = touchY - canvasRect.top;
+      // p.touchStarted = (event) => {
+      //   if (event.touches && event.touches.length > 0) {
+      //     if (!gameOver && currentBlock) {
+      //       const touchX = event.touches[0].clientX;
+      //       const touchY = event.touches[0].clientY;
+      //       const canvasRect = p.canvas.getBoundingClientRect();
+      //       const touchCanvasX = touchX - canvasRect.left;
+      //       const touchCanvasY = touchY - canvasRect.top;
       
-            if (touchCanvasX < p.width / 2) {
-              Matter.Body.setVelocity(currentBlock.body, { x: -1.5, y: 1 });
-            } else {
-              Matter.Body.setVelocity(currentBlock.body, { x: 1.5, y: 1 });
-            }
-          }
+      //       if (touchCanvasX < p.width / 2) {
+      //         Matter.Body.setVelocity(currentBlock.body, { x: -1.5, y: 1 });
+      //       } else {
+      //         Matter.Body.setVelocity(currentBlock.body, { x: 1.5, y: 1 });
+      //       }
+      //     }
       
-          if (gameOver) {
-            const touchX = event.touches[0].clientX;
-            const touchY = event.touches[0].clientY;
-            const canvasRect = p.canvas.getBoundingClientRect();
-            const touchCanvasX = touchX - canvasRect.left;
-            const touchCanvasY = touchY - canvasRect.top;
+      //     if (gameOver) {
+      //       const touchX = event.touches[0].clientX;
+      //       const touchY = event.touches[0].clientY;
+      //       const canvasRect = p.canvas.getBoundingClientRect();
+      //       const touchCanvasX = touchX - canvasRect.left;
+      //       const touchCanvasY = touchY - canvasRect.top;
       
-            if (touchCanvasX > p.width / 2 - 50 && touchCanvasX < p.width / 2 + 50 && touchCanvasY > p.height / 2 + 100 && touchCanvasY < p.height / 2 + 150) {
-              handleTweet(score);
-            } else if (touchCanvasX > p.width / 2 - 50 && touchCanvasX < p.width / 2 + 50 && touchCanvasY > p.height / 2 + 25 && touchCanvasY < p.height / 2 + 75) {
-              window.location.reload();
-            }
-          }
-        }
+      //       if (touchCanvasX > p.width / 2 - 50 && touchCanvasX < p.width / 2 + 50 && touchCanvasY > p.height / 2 + 100 && touchCanvasY < p.height / 2 + 150) {
+      //         handleTweet(score);
+      //       } else if (touchCanvasX > p.width / 2 - 50 && touchCanvasX < p.width / 2 + 50 && touchCanvasY > p.height / 2 + 25 && touchCanvasY < p.height / 2 + 75) {
+      //         window.location.reload();
+      //       }
+      //     }
+      //   }
       
-        return false;
-      };
+      //   return false;
+      // };
 
       // キーボード操作のイベント処理
       p.keyPressed = (event) => {
